@@ -1,0 +1,16 @@
+//BPXCOPY JOB CLASS=A,MSGCLASS=H,MSGLEVEL=(1,),TIME=1440,REGION=0M  
+//*                                                                 
+//***********************************************                   
+//*     COPY zOS USS FILE TO JES                                    
+//***********************************************                   
+//*                                                                 
+//PRINT EXEC PGM=IKJEFT01                                           
+//OUTFILE  DD  DSN=IBMUSER.@LOG.OUTPUT,                             
+//             DISP=(NEW,CATLG),                                    
+//             SPACE=(TRK,(10,5),RLSE),                             
+//             DCB=(LRECL=256,DSORG=PS,BLKSIZE=0,RECFM=FB)          
+//USSLOGIN DD  PATH='/var/logs/inetd.stdout',                       
+//         PATHOPTS=ORDONLY                                         
+//SYSTSPRT DD  SYSOUT=*                                             
+//SYSTSIN  DD  *                                                    
+  OCOPY INDD(USSLOGIN) OUTDD(OUTFILE) TEXT                          
